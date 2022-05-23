@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+// 리액트 패키지
+import React from 'react';
+import styled from "styled-components";
+
+// 파일
+import Row from './Row';
 
 function App() {
+  const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container>
+        <h1>내 일주일은?</h1>
+        {WEEKDAY.map((day, idx) => (<Row key={idx} day={day}/>))}
+      </Container>
     </div>
   );
 }
+
+const Container = styled.div`
+text-align: center;
+`
 
 export default App;
