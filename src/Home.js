@@ -1,19 +1,25 @@
+// 모듈
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+
+// 파일
+
 
 const Home = ({day}) => {
     const [filled, setFilled] = React.useState([false, false, false, false, false]);
+    let history = useHistory();
     const randomNum = Math.floor(Math.random() * 5);
     
     useEffect(() => {
         // 랜덤한 숫자의 인덱스만큼 false를 true로 변경 
         const map = filled.map((a, idx) => {
-            const toTrue = idx < randomNum ? filled[idx] = true : filled[idx];
+            const toTrue = idx <= randomNum ? filled[idx] = true : filled[idx];
             return toTrue
             })
             setFilled(map)
-    }, [])
-
+    }, [randomNum])
+    
     return(
         <RowContainer>
             <Day>{day}</Day>
@@ -26,7 +32,12 @@ const Home = ({day}) => {
                     )
                 )}
             </Circles>
-            <RatingButton>평점 남기기</RatingButton>
+            <RatingButton onClick={() => {
+                history.push({
+                    pathname : `/review/${day}`,
+                    state: filled,
+                })
+            }}>평점 남기기</RatingButton>
         </RowContainer>
     )
 }

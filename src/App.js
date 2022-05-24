@@ -31,7 +31,7 @@ const App = () => {
       <h1>내 일주일은?</h1>
       <Switch>
         <Route path="/" exact render={(props) => (DayList.map((day, idx) => <Home key={idx} day={day}></Home>))}></Route>
-        <Route path="/review" component={Review}></Route>
+        <Route path="/review/:day_name" component={Review}></Route>
       </Switch>
     </Container>
     )
