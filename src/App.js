@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Route } from 'react-router-dom';
-import { Switch } from 'react-router-dom';
+import { Route , Switch} from 'react-router-dom';
 
 // 파일
 import Home from './Home';
@@ -28,19 +27,13 @@ const App = () => {
                 return weekList[day];
   });
   return(
-        <div className="App">
-      <Container>
-        <h1>내 일주일은?</h1>
-        <div>
-
-          {DayList.map((day, idx) => (<Home key={idx} day={day}></Home>))}
-          
-        </div>
-        <Switch>
-          <Route path="/" exact={true} component={Home}></Route>
-        </Switch>
-      </Container>
-    </div>
+<Container className="App">
+      <h1>내 일주일은?</h1>
+      <Switch>
+        <Route path="/" exact render={(props) => (DayList.map((day, idx) => <Home key={idx} day={day}></Home>))}></Route>
+        <Route path="/review" component={Review}></Route>
+      </Switch>
+    </Container>
     )
 }
 
