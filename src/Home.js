@@ -6,22 +6,20 @@ import styled from "styled-components";
 // 파일
 
 
-const Home = ({day}) => {
+const Home = ({day, randomNum}) => {
     const [filled, setFilled] = React.useState([false, false, false, false, false]);
     let history = useHistory();
-    const randomNum = Math.floor(Math.random() * 5);
-    
-    React.useEffect(() => {
-        const map = filled.map((a, idx) => {
-            const toTrue = idx <= randomNum ? filled[idx] = true : filled[idx];
-            return toTrue
-            })
-        setFilled(map)
-        // 랜덤한 숫자의 인덱스만큼 false를 true로 변경 
-    }, [])
 
-    // false로 만들어주는 set함수를 만들어서 props로 내린다
-    
+    const toTruebyScore = filled.map((a, idx) => {
+        const toTrue = idx <= randomNum ? filled[idx] = true : filled[idx];
+        return toTrue
+        })
+
+    React.useEffect(() => {
+        // 랜덤한 숫자의 인덱스만큼 false를 true로 변경 
+            setFilled(toTruebyScore)
+    }, [])
+        
     return(
         <RowContainer>
             <Day>{day}</Day>
@@ -39,7 +37,6 @@ const Home = ({day}) => {
                 // 동시에 해당 경로로 filled state의 값을 모두 false로 바꾸는 함수를 넘깁니다.
                 history.push({
                     pathname : `/review/${day}`,
-                    // state: makeAllFalse([false, false, false, false, false]),
                 })
             }}>평점 남기기</RatingButton>
         </RowContainer>
